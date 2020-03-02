@@ -1,0 +1,8 @@
+Tom Cruise face a la "Cocktails"
+The bar SVG animates lights flicker etc
+Search feature
+"feeling lucky" feature
+Scroll feature (hide otherwise)
+
+i.e <!-- <button class="button-scroll">Scroll the Cocktails</button>
+        <button class="button-random">Feeling lucky?</button> -->
