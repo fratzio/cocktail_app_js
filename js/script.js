@@ -14,30 +14,158 @@ var cocktailRepository = (function() {
     .strDrinkThumb = img url
     */
 
-  //
-  function loop() {
+  // function newLoop() {
+  //   var urls = ["a", "b", "c", "d"];
+  //   for (var i = 0; i < urls.length; i++) {
+  //     fetch(apiUrl + urls[i]).then(function(response) {
+  //       return response.json();
+  //     });
+  //   }
+
+  // async function() {
+  //   for (const a of b) {
+  //   const results = await axios.get()
+  //   array.push(results.data)
+  //   }
+  //   }
+
+  async function asyncFunc() {
     var urls = ["a", "b", "c", "d"];
     for (var i = 0; i < urls.length; i++) {
-      fetch(apiUrl + urls[i])
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(json) {
-          var payload = json.drinks;
-          payload.forEach(function(item) {
-            var cocktail = {
-              name: item.strDrink,
-              instructions: item.strInstructions,
-              img: item.strDrinkThumb
-            };
-            // pushes cocktail to repository
-            add(cocktail);
-          });
-        })
-        .catch(function(e) {
-          console.error(e);
+      url = apiUrl + urls[i];
+      var res = await axios.get(url);
+      var data = res.data.drinks;
+        
+    return repository;
+  }
+
+//   .forEach(function(item) {
+//     var cocktail = {
+//       name: item.strDrink,
+//       instructions: item.strInstructions,
+//       img: item.strDrinkThumb
+//     };
+//     // console.log(cocktail);
+//     add(cocktail);
+//   }) // console.log(data);
+//   .catch(function(e) {
+//     console.error(e);
+//   });
+// });
+
+  // grab the list of pokemon
+  function loadList() {
+    return fetch(apiUrl)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        json.results.forEach(function(item) {
+          var pokemon = {
+            name: item.name,
+            detailsUrl: item.url
+          };
+          add(pokemon);
         });
-    }
+      })
+      .catch(function(e) {
+        console.error(e);
+      });
+  }
+
+  function testfunc() {
+    Promise.all([
+      fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a"),
+      fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b")
+    ])
+      .then(function(responses) {
+        // Get a JSON object from each of the responses
+        return responses.map(function(response) {
+          return response.json();
+        });
+      })
+      .then(function(data) {
+        data.forEach(function(item) {
+          console.log(item);
+        });
+        // Log the data to the console
+        // You would do something with both sets of data here
+      })
+      .catch(function(error) {
+        // if there's an error, log it
+        console.log(error);
+      });
+  }
+
+  // function testfunc() {
+  //   var urls = [
+  //     "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a",
+  //     "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b"
+  //   ];
+  //   var promises = urls.map(url =>
+  //     fetch(url).then(function(responseJSON) {
+  //       payl = responseJSON.drinks;
+  //       payl.forEach(function(item) {
+  //         var cocktail = {
+  //           name: item.strDrink,
+  //           instructions: item.strInstructions,
+  //           img: item.strDrinkThumb
+  //         };
+  //         // console.log(cocktail);
+  //         add(cocktail);
+  //       });
+  //     })
+  //   );
+  //   Promise.all(promises).then(results => {
+  //     return results;
+  //   });
+  // }
+
+  // function testfunc() {
+  //   var promises = [];
+  //   var urls = ["a", "b", "c"];
+  //   for (var i = 0; i < urls.length; i++) {
+  //     url = apiUrl + urls[i];
+  //     console.log(url);
+  //     return $.ajax(url, { dataType: "json" }).then(function(responseJSON) {
+  //       payl = responseJSON.drinks;
+  //       payl.forEach(function(item) {
+  //         var cocktail = {
+  //           name: item.strDrink,
+  //           instructions: item.strInstructions,
+  //           img: item.strDrinkThumb
+  //         };
+  //         console.log(cocktail);
+  //         promises.push(cocktail);
+  //       });
+  //     });
+  //   }
+  //   Promise.all(promises)
+  //     .then(() => {
+  //       console.log(promises);
+  //       return promises;
+  //     })
+  //     .catch(e => {
+  //       console.error(e);
+  //     });
+  //   // console.log(newArray);
+  // }
+
+  //
+  function loopThrough(array) {
+    array.forEach(function(item) {
+      console.log(item);
+    });
+    //   payl.forEach(function(item) {
+    //     var cocktail = {
+    //       name: item.strDrink,
+    //       instructions: item.strInstructions,
+    //       img: item.strDrinkThumb
+    //     };
+    //     // pushes cocktail to repository
+    //     console.log(cocktail);
+    //     add(cocktail);
+    //   });
   }
 
   function loopThroughPayloads() {
@@ -48,30 +176,30 @@ var cocktailRepository = (function() {
     console.log(repository);
   }
 
-  // fetching the cocktail payload
-  function loadList(letter) {
-    newUrl = apiUrl.concat(letter);
-    console.log(newUrl);
-    return fetch(newUrl)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(json) {
-        var payload = json.drinks;
-        payload.forEach(function(item) {
-          var cocktail = {
-            name: item.strDrink,
-            instructions: item.strInstructions,
-            img: item.strDrinkThumb
-          };
-          // pushes cocktail to repository
-          add(cocktail);
-        });
-      })
-      .catch(function(e) {
-        console.error(e);
-      });
-  }
+  // // fetching the cocktail payload
+  // function loadList(letter) {
+  //   newUrl = apiUrl.concat(letter);
+  //   console.log(newUrl);
+  //   fetch(newUrl)
+  //     .then(function(response) {
+  //       return response.json();
+  //     })
+  //     .then(function(json) {
+  //       var payload = json.drinks;
+  //       payload.forEach(function(item) {
+  //         var cocktail = {
+  //           name: item.strDrink,
+  //           instructions: item.strInstructions,
+  //           img: item.strDrinkThumb
+  //         };
+  //         // pushes cocktail to repository
+  //         add(cocktail);
+  //       });
+  //     })
+  //     .catch(function(e) {
+  //       console.error(e);
+  //     });
+  // }
 
   // fetching the cocktail payload
   function loadListNew() {
@@ -97,9 +225,12 @@ var cocktailRepository = (function() {
   }
 
   function loadListAjax() {
-    $.ajax("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b", {
-      dataType: "json"
-    })
+    return $.ajax(
+      "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b",
+      {
+        dataType: "json"
+      }
+    )
       .then(function(responseJSON) {
         var payl = responseJSON.drinks;
         payl.forEach(function(item) {
@@ -297,23 +428,26 @@ var cocktailRepository = (function() {
     loadList: loadList,
     loopThroughPayloads: loopThroughPayloads,
     add: add,
-    loop: loop,
     search: search,
     addListItem: addListItem,
     showDetails: showDetails,
-    loadListAjax2: loadListAjax2
+    loadListAjax2: loadListAjax2,
+    testfunc: testfunc,
+    loopThrough: loopThrough,
+    asyncFunc: asyncFunc
     // showLoadingMessage: showLoadingMessage,
     // hideLoadingMessage: hideLoadingMessage
   };
 })();
 
 var $newList = $("ul");
-
+console.log(typeof cocktailRepository.asyncFunc());
+console.log(cocktailRepository.asyncFunc());
 // Creating list of cocktails and then load them to page
-cocktailRepository.loadListAjax2().then(function() {
+cocktailRepository.asyncFunc().then(
   cocktailRepository.getALL().forEach(function(cocktail) {
     console.log("hello");
     console.log(cocktail);
     cocktailRepository.addListItem(cocktail);
-  });
-});
+  })
+);
