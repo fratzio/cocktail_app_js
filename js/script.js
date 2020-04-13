@@ -50,6 +50,7 @@ var cocktailRepository = (function () {
 
   // function to loop through payload
   const callEndpoint = (url) => {
+    console.log(url);
     // Add reject catch to this
     return new Promise(async (resolve, reject) => {
       let queryEndpoint = await fetch(url);
@@ -57,12 +58,8 @@ var cocktailRepository = (function () {
       console.log(queryEndpointJson.drinks);
       // catch for empty payloads
       if (queryEndpointJson.drinks === null) {
-        var newObj = {};
-        newObj.name = 'No cocktails';
-        newObj.instructions = 'No cocktails';
-        newObj.img = '';
-        add(newObj);
-        resolve(`Payload added to db`);
+        // add skip/continue here
+        resolve(`Nothing in payl`);
       } else {
         for (i of queryEndpointJson.drinks) {
           var newObj = {};
