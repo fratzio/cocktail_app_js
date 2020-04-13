@@ -1,11 +1,9 @@
 // Create IIFF for app
-var cocktailRepository = (function() {
+var cocktailRepository = (function () {
   // Cocktail repo
   var repository = [];
 
   /* External API */
-  // can't get dumb of db so testing with a cocktails first
-  var apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=";
 
   /*
     PAYLOAD ITEMS
@@ -14,270 +12,76 @@ var cocktailRepository = (function() {
     .strDrinkThumb = img url
     */
 
-  // function newLoop() {
-  //   var urls = ["a", "b", "c", "d"];
-  //   for (var i = 0; i < urls.length; i++) {
-  //     fetch(apiUrl + urls[i]).then(function(response) {
-  //       return response.json();
-  //     });
-  //   }
-
-  // async function() {
-  //   for (const a of b) {
-  //   const results = await axios.get()
-  //   array.push(results.data)
-  //   }
-  //   }
-
-  async function asyncFunc() {
-    var urls = ["a", "b", "c", "d"];
-    for (var i = 0; i < urls.length; i++) {
-      url = apiUrl + urls[i];
-      var res = await axios.get(url);
-      var data = res.data.drinks;
-        
-    return repository;
-  }
-
-//   .forEach(function(item) {
-//     var cocktail = {
-//       name: item.strDrink,
-//       instructions: item.strInstructions,
-//       img: item.strDrinkThumb
-//     };
-//     // console.log(cocktail);
-//     add(cocktail);
-//   }) // console.log(data);
-//   .catch(function(e) {
-//     console.error(e);
-//   });
-// });
-
-  // grab the list of pokemon
-  function loadList() {
-    return fetch(apiUrl)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(json) {
-        json.results.forEach(function(item) {
-          var pokemon = {
-            name: item.name,
-            detailsUrl: item.url
-          };
-          add(pokemon);
-        });
-      })
-      .catch(function(e) {
-        console.error(e);
-      });
-  }
-
-  function testfunc() {
-    Promise.all([
-      fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a"),
-      fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b")
-    ])
-      .then(function(responses) {
-        // Get a JSON object from each of the responses
-        return responses.map(function(response) {
-          return response.json();
-        });
-      })
-      .then(function(data) {
-        data.forEach(function(item) {
-          console.log(item);
-        });
-        // Log the data to the console
-        // You would do something with both sets of data here
-      })
-      .catch(function(error) {
-        // if there's an error, log it
-        console.log(error);
-      });
-  }
-
-  // function testfunc() {
-  //   var urls = [
-  //     "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a",
-  //     "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b"
-  //   ];
-  //   var promises = urls.map(url =>
-  //     fetch(url).then(function(responseJSON) {
-  //       payl = responseJSON.drinks;
-  //       payl.forEach(function(item) {
-  //         var cocktail = {
-  //           name: item.strDrink,
-  //           instructions: item.strInstructions,
-  //           img: item.strDrinkThumb
-  //         };
-  //         // console.log(cocktail);
-  //         add(cocktail);
-  //       });
-  //     })
-  //   );
-  //   Promise.all(promises).then(results => {
-  //     return results;
-  //   });
-  // }
-
-  // function testfunc() {
-  //   var promises = [];
-  //   var urls = ["a", "b", "c"];
-  //   for (var i = 0; i < urls.length; i++) {
-  //     url = apiUrl + urls[i];
-  //     console.log(url);
-  //     return $.ajax(url, { dataType: "json" }).then(function(responseJSON) {
-  //       payl = responseJSON.drinks;
-  //       payl.forEach(function(item) {
-  //         var cocktail = {
-  //           name: item.strDrink,
-  //           instructions: item.strInstructions,
-  //           img: item.strDrinkThumb
-  //         };
-  //         console.log(cocktail);
-  //         promises.push(cocktail);
-  //       });
-  //     });
-  //   }
-  //   Promise.all(promises)
-  //     .then(() => {
-  //       console.log(promises);
-  //       return promises;
-  //     })
-  //     .catch(e => {
-  //       console.error(e);
-  //     });
-  //   // console.log(newArray);
-  // }
-
-  //
-  function loopThrough(array) {
-    array.forEach(function(item) {
-      console.log(item);
-    });
-    //   payl.forEach(function(item) {
-    //     var cocktail = {
-    //       name: item.strDrink,
-    //       instructions: item.strInstructions,
-    //       img: item.strDrinkThumb
-    //     };
-    //     // pushes cocktail to repository
-    //     console.log(cocktail);
-    //     add(cocktail);
-    //   });
-  }
-
-  function loopThroughPayloads() {
-    var urls = ["a", "b", "c", "d"];
-    for (var i = 0; i < urls.length; i++) {
-      loadList(urls[i]);
-    }
-    console.log(repository);
-  }
-
-  // // fetching the cocktail payload
-  // function loadList(letter) {
-  //   newUrl = apiUrl.concat(letter);
-  //   console.log(newUrl);
-  //   fetch(newUrl)
-  //     .then(function(response) {
-  //       return response.json();
-  //     })
-  //     .then(function(json) {
-  //       var payload = json.drinks;
-  //       payload.forEach(function(item) {
-  //         var cocktail = {
-  //           name: item.strDrink,
-  //           instructions: item.strInstructions,
-  //           img: item.strDrinkThumb
-  //         };
-  //         // pushes cocktail to repository
-  //         add(cocktail);
-  //       });
-  //     })
-  //     .catch(function(e) {
-  //       console.error(e);
-  //     });
-  // }
-
-  // fetching the cocktail payload
-  function loadListNew() {
-    return fetch(apiUrl)
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(json) {
-        var payload = json.drinks;
-        payload.forEach(function(item) {
-          var cocktail = {
-            name: item.strDrink,
-            instructions: item.strInstructions,
-            img: item.strDrinkThumb
-          };
-          // pushes cocktail to repository
-          add(cocktail);
-        });
-      })
-      .catch(function(e) {
-        console.error(e);
-      });
-  }
-
-  function loadListAjax() {
-    return $.ajax(
-      "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b",
-      {
-        dataType: "json"
-      }
-    )
-      .then(function(responseJSON) {
-        var payl = responseJSON.drinks;
-        payl.forEach(function(item) {
-          var cocktail = {
-            name: item.strDrink,
-            instructions: item.strInstructions,
-            img: item.strDrinkThumb
-          };
-          // pushes cocktail to repository
-          add(cocktail);
-        });
-        console.log(repository);
-      })
-      .catch(function(err) {
-        console.log("Caught an error:" + err.statusText);
-      });
-  }
-
-  function loadListAjax2() {
-    return $.ajax(
-      "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b",
-      {
-        dataType: "json",
-        method: "GET"
-      }
-    )
-      .then(function(responseJSON) {
-        payl = responseJSON.drinks;
-        payl.forEach(function(item) {
-          var cocktail = {
-            name: item.strDrink,
-            instructions: item.strInstructions,
-            img: item.strDrinkThumb
-          };
-          // pushes cocktail to repository
-          add(cocktail);
-        });
-      })
-      .catch(function(err) {
-        console.log("Caught an error:" + err.statusText);
-      });
-  }
-
   // Adding them to the internal repo
   function add(cocktail) {
     repository.push(cocktail);
   }
+
+  // Async functions
+
+  let alphabetArray = [
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=c',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=d',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=e',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=f',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=g',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=h',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=i',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=j',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=k',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=l',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=m',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=n',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=o',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=p',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=q',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=r',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=s',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=t',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=u',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=v',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=w',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=x',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=y',
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?f=z',
+  ];
+
+  // function to loop through payload
+  const callEndpoint = (url) => {
+    // Add reject catch to this
+    return new Promise(async (resolve, reject) => {
+      let queryEndpoint = await fetch(url);
+      let queryEndpointJson = await queryEndpoint.json();
+      console.log(queryEndpointJson.drinks);
+      // catch for empty payloads
+      if (queryEndpointJson.drinks === null) {
+        var newObj = {};
+        newObj.name = 'No cocktails';
+        newObj.instructions = 'No cocktails';
+        newObj.img = '';
+        add(newObj);
+        resolve(`Payload added to db`);
+      } else {
+        for (i of queryEndpointJson.drinks) {
+          var newObj = {};
+          newObj.name = i.strDrink;
+          newObj.instructions = i.strInstructions;
+          newObj.img = i.strDrinkThumb;
+          // newArray.push(newObj);
+          add(newObj);
+          resolve(`Payload added to db`);
+        }
+      }
+    });
+  };
+
+  const asyncFunc = async () => {
+    const status = await Promise.all(
+      alphabetArray.map(async (url) => callEndpoint(url))
+    );
+  };
 
   /*
     Client side functions
@@ -285,9 +89,9 @@ var cocktailRepository = (function() {
 
   // function that displays cocktails as buttons on the page
   function addListItem(cocktail) {
-    var $listItem = $("<li></li>");
+    var $listItem = $('<li></li>');
     var $button = $(
-      '<button class="customButton">' + cocktail.name + "</button>"
+      '<button class="customButton">' + cocktail.name + '</button>'
     );
     // Adding var to the new Button element
     // $button.text("yay");
@@ -299,7 +103,7 @@ var cocktailRepository = (function() {
     // Add list element to the DOM via the ul parent
     $newList.append($listItem);
     // Add event listener to button element
-    $button.on("click", () => {
+    $button.on('click', () => {
       //   showLoadingMessage();
       showDetails(cocktail);
     });
@@ -333,9 +137,9 @@ var cocktailRepository = (function() {
   // Modal //
   // Show modal
   // grab modal container
-  var $modalContainer = $("#modal-container");
+  var $modalContainer = $('#modal-container');
 
-  function showModal(title, url, text) {
+  function showModal(title, text, url) {
     //Clear all existing modal content
     $modalContainer.empty();
     // create new modal
@@ -344,22 +148,22 @@ var cocktailRepository = (function() {
     // Add new modal content
     // button
     var closeButtonElement = $(
-      '<button class="modal-close">' + "close" + "</button>"
+      '<button class="modal-close">' + 'close' + '</button>'
     );
     // close modal
-    closeButtonElement.on("click", hideModal);
+    closeButtonElement.on('click', hideModal);
 
     // title
-    var titleElement = $("<h1>" + title + "</h1>");
+    var titleElement = $('<h1>' + title + '</h1>');
     // wrap body content in a div
     var bodyWrapper = $('<div class="body-element"></div>');
     // paragraph element
-    var contentElement = $('<p class="modal-p">' + text + "</p>");
+    var contentElement = $('<p class="modal-p">' + text + '</p>');
 
     // img
-    var imgWrapper = $("<div></div>");
-    var imgElement = $("<img>");
-    imgElement.attr("src", url);
+    var imgWrapper = $('<div></div>');
+    var imgElement = $('<img>');
+    imgElement.attr('src', url);
 
     // attach to DOM
     bodyWrapper.append(closeButtonElement);
@@ -371,22 +175,22 @@ var cocktailRepository = (function() {
     $modalContainer.append(modal);
 
     // add class to show element
-    $modalContainer.addClass("is-visible");
+    $modalContainer.addClass('is-visible');
   }
 
   // hide modal
   function hideModal() {
     // grab modal (parent element)
-    $modalContainer.removeClass("is-visible");
+    $modalContainer.removeClass('is-visible');
   }
   // closing modal with esc button
-  $(window).on("keydown", e => {
-    if (e.key === "Escape" && $modalContainer.hasClass("is-visible")) {
+  $(window).on('keydown', (e) => {
+    if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
       hideModal();
     }
   });
 
-  $modalContainer.on("click", e => {
+  $modalContainer.on('click', (e) => {
     // listens to clicks on container
     var $target = e.target;
     if ($target === $modalContainer) {
@@ -402,52 +206,49 @@ var cocktailRepository = (function() {
 
   // search for a Cocktail
   function search(nameSearch) {
-    var result = repository.filter(word => word.name === nameSearch);
+    var result = repository.filter((word) => word.name === nameSearch);
     if (result.length > 0) {
-      console.log("Here is your Cocktail:" + "<br>");
+      console.log('Here is your Cocktail:' + '<br>');
       // return the complete object of the relative Cocktail
-      Object.keys(result[0]).forEach(function(property) {
-        console.log("<br>" + property + ": " + result[0][property]);
+      Object.keys(result[0]).forEach(function (property) {
+        console.log('<br>' + property + ': ' + result[0][property]);
       });
       return "There's a match!";
     } else {
-      return "There is no Cocktail with that name in the repo";
+      return 'There is no Cocktail with that name in the repo';
     }
   }
 
   // return complete repository
 
-  function getALL() {
+  function getAll() {
     return repository;
   }
 
+  // return complete repository
+
+  function getTestArray() {
+    return newArray;
+  }
   // return public methods in IIFE object
 
   return {
-    getALL: getALL,
-    loadList: loadList,
-    loopThroughPayloads: loopThroughPayloads,
+    getAll: getAll,
+    getTestArray: getTestArray,
     add: add,
     search: search,
     addListItem: addListItem,
     showDetails: showDetails,
-    loadListAjax2: loadListAjax2,
-    testfunc: testfunc,
-    loopThrough: loopThrough,
-    asyncFunc: asyncFunc
+    asyncFunc: asyncFunc,
     // showLoadingMessage: showLoadingMessage,
     // hideLoadingMessage: hideLoadingMessage
   };
 })();
 
-var $newList = $("ul");
-console.log(typeof cocktailRepository.asyncFunc());
-console.log(cocktailRepository.asyncFunc());
-// Creating list of cocktails and then load them to page
-cocktailRepository.asyncFunc().then(
-  cocktailRepository.getALL().forEach(function(cocktail) {
-    console.log("hello");
-    console.log(cocktail);
+var $newList = $('ul');
+
+cocktailRepository.asyncFunc().then(function () {
+  cocktailRepository.getAll().forEach(function (cocktail) {
     cocktailRepository.addListItem(cocktail);
-  })
-);
+  });
+});
