@@ -65,17 +65,12 @@ var cocktailRepository = (function () {
           var newObj = {};
           newObj.name = i.strDrink;
           newObj.instructions = i.strInstructions;
-          if (i.strIngredient1 && i.strMeasure1) {
-            newObj.ingred = 'test ' + i.strMeasure1 + ' ' + strIngredient1;
-          }
           newObj.img = i.strDrinkThumb;
           // newArray.push(newObj);
           add(newObj);
           resolve(`Payload added to db`);
         }
       }
-    }).catch(function (error) {
-      console.error(error);
     });
   };
 
@@ -113,12 +108,7 @@ var cocktailRepository = (function () {
 
   // function to show details of cocktail in modal
   function showDetails(cocktail) {
-    showModal(
-      cocktail.name,
-      cocktail.instructions,
-      cocktail.ingred,
-      cocktail.img
-    );
+    showModal(cocktail.name, cocktail.instructions, cocktail.img);
     // hideLoadingMessage();
   }
 
@@ -146,7 +136,7 @@ var cocktailRepository = (function () {
   // grab modal container
   var $modalContainer = $('#modal-container');
 
-  function showModal(title, text, ingred, url) {
+  function showModal(title, text, url) {
     //Clear all existing modal content
     $modalContainer.empty();
     // create new modal
@@ -166,8 +156,6 @@ var cocktailRepository = (function () {
     var bodyWrapper = $('<div class="body-element"></div>');
     // paragraph element
     var contentElement = $('<p class="modal-p">' + text + '</p>');
-    // instruc element
-    var instruc = $('<p>' + ingred + '</p>');
 
     // img
     var imgWrapper = $('<div></div>');
@@ -177,7 +165,6 @@ var cocktailRepository = (function () {
     // attach to DOM
     bodyWrapper.append(closeButtonElement);
     bodyWrapper.append(titleElement);
-    modal.append(instruc);
     bodyWrapper.append(contentElement);
     imgWrapper.append(imgElement);
     modal.append(bodyWrapper);
